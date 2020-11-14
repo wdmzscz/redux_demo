@@ -1,14 +1,15 @@
-//import {Reducer} from 'redux'
+import {INCREMENT,DECREMENT} from './action_types'
+
 let initState = 0
 export default function operateCount(preState=initState,action){
 
     const {type, data} = action
     let newState
     switch (type){
-        case 'increment':
+        case INCREMENT:
             newState = preState + data
             return newState
-        case 'decrement':
+        case DECREMENT:
             newState = preState - data
             return newState
 

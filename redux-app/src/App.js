@@ -1,6 +1,7 @@
 import './App.css';
 //import store from './redux/store'
 import React, {Component} from 'react'
+import {incrementAction,decrementAction} from './redux/action_creator';
 
 export default class App extends Component{
 
@@ -10,19 +11,13 @@ export default class App extends Component{
 
     increment =()=>{
       let {value} = this.selectNumber;
-      this.props.store.dispatch({
-        type:'increment',
-        data:value*1
-      })
+      this.props.store.dispatch(incrementAction(value*1))
     }
 
     
     decrement =()=>{
       let {value} = this.selectNumber;
-      this.props.store.dispatch({
-        type:'decrement',
-        data:value*1
-      })
+      this.props.store.dispatch(decrementAction(value*1))
     }
 
     incrementIfOdd=()=>{
@@ -30,20 +25,14 @@ export default class App extends Component{
       let {value} = this.selectNumber;
       let count = this.props.store.getState();
        if(count%2===1){
-        this.props.store.dispatch({
-          type:'increment',
-          data:value*1
-        })
+        this.props.store.dispatch(incrementAction(value*1))
       }
     }
 
     incrementAsync=()=>{
       let {value} = this.selectNumber;
        setTimeout(()=>{        
-        this.props.store.dispatch({
-          type:'increment',
-          data:value*1
-        })
+        this.props.store.dispatch(incrementAction(value*1))
       },1000)
     }
 
