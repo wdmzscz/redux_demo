@@ -1,49 +1,54 @@
 import './App.css';
-
+//import store from './redux/store'
 import React, {Component} from 'react'
 
 export default class App extends Component{
-    state={
-      count:0
+
+    componentDidMount(){
+      console.log(this.props.store.getState())
     }
 
     increment =()=>{
       let {value} = this.selectNumber;
-      let {count} = this.state;
-      this.setState({
-        count:value*1+count
+      this.props.store.dispatch({
+        type:'increment',
+        data:value*1
       })
     }
 
     
     decrement =()=>{
       let {value} = this.selectNumber;
-      let {count} = this.state;
-      this.setState({
-        count:count-value*1
+      this.props.store.dispatch({
+        type:'decrement',
+        data:value*1
       })
     }
 
     incrementIfOdd=()=>{
+      debugger;
       let {value} = this.selectNumber;
-      let {count} = this.state;
-      if(count%2==1){
-        this.setState({
-          count:value*1+count
+      let count = this.props.store.getState();
+       if(count%2===1){
+        this.props.store.dispatch({
+          type:'increment',
+          data:value*1
         })
       }
     }
 
     incrementAsync=()=>{
       let {value} = this.selectNumber;
-      let {count} = this.state;
-      setTimeout(()=>{        
-        this.setState({
-        count:value*1+count
-      })},1000)
+       setTimeout(()=>{        
+        this.props.store.dispatch({
+          type:'increment',
+          data:value*1
+        })
+      },1000)
     }
+
     render(){
-      let {count} = this.state
+      let count = this.props.store.getState();
        return(
           <div>
             <h3>Count is {count}</h3>
